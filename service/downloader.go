@@ -89,6 +89,7 @@ func (d *DownLoader) DownloadFile() {
 		_, err := file.Write(d.store[chunk])
 		if err != nil {
 			fmt.Println("error in assamble", err)
+			return
 		}
 		chunk = chunk + chunkSize
 	}
