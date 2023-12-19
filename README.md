@@ -1,4 +1,4 @@
-To run the downloader -
-go run cmd/main.go
+# To run the downloader 
+  go run cmd/main.go
 
 
