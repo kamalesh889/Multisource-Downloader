@@ -17,8 +17,12 @@ const (
 // 	fileUrl = "https://cdn.videvo.net/videvo_files/video/premium/video0042/large_watermarked/900-2_900-6334-PD2_preview.mp4"
 // )
 
+// var (
+// 	fileUrl = "https://getsamplefiles.com/download/mp4/sample-1.mp4"
+// )
+
 var (
-	fileUrl = "https://getsamplefiles.com/download/mp4/sample-1.mp4"
+	fileUrl = "https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_30mb.mp4"
 )
 
 // var (
@@ -120,10 +124,6 @@ func (d *DownLoader) DownloadInchunks(semaphore chan struct{}, pointerChunk int6
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusPartialContent {
-		return
-	}
-
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error reading response body:", err)
@@ -137,7 +137,7 @@ func (d *DownLoader) DownloadInchunks(semaphore chan struct{}, pointerChunk int6
 	}
 	d.mu.Unlock()
 
-	if resp.StatusCode == http.StatusPartialContent {
+	if resp.StatusCode != http.StatusPartialContent {
 		*exitSig = true
 	}
 
